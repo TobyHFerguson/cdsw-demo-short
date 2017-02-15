@@ -10,6 +10,7 @@ Simple demonstrations of Cloudera Data Science Workbench.
 ```Python
 ! pip install pandas_highcharts tensorflow
 ```
+
 2. In an R Session:
 ```R
 library("devtools")
