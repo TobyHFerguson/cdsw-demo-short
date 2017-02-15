@@ -19,4 +19,5 @@ install.packages("nycflights13")
 install.packages("Lahman")
 install.packages("mgcv")
 ```
-Stop all sessions, then proceed.
+
+3. Stop all sessions, then proceed.
