@@ -1,0 +1,10 @@
+R
+.local
+.julia
+node_modules
+.pip
+.ipython
+.cache
+.config
+.butterfly
+.viminfo
