@@ -1,37 +1,85 @@
-# source: http://tneal.org/post/tensorflow-ipython/TensorFlowMNIST/
-
-import tensorflow.examples.tutorials.mnist.input_data as input_data
 import tensorflow as tf
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
+import numpy as np
 import matplotlib
-%matplotlib inline
+from matplotlib import pyplot as plt
+import utils
 
-mnist = input_data.read_data_sets("data/MNIST/", one_hot=True)
+### Import MNIST data
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets('data/', one_hot=True)
 
-tmp = mnist.train.images[0]
-tmp = tmp.reshape((28,28))
+### View Data
+for i in xrange(0, 3):
+  tmp = mnist.train.images[i]
+  tmp = tmp.reshape((28,28))
+  plt.imshow(tmp, cmap = cm.Greys)
+  plt.show()
 
-plt.imshow(tmp, cmap = cm.Greys)
-plt.show()
+### Parameters
+learning_rate = 0.01
+training_epochs = 5
+batch_size = 100
+display_step = 1
+logs_path = '/tmp/tensorboard'
 
-x = tf.placeholder(tf.float32, [None, 784])
-W = tf.Variable(tf.zeros([784, 10]))
-b = tf.Variable(tf.zeros([10]))
-y = tf.nn.softmax(tf.matmul(x, W) + b)
-y_ = tf.placeholder(tf.float32, [None, 10])
-cross_entropy = -tf.reduce_sum(y_*tf.log(y))
-train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
-init = tf.initialize_all_variables()
+### Cleanup old logs
+if tf.gfile.Exists(logs_path):
+  tf.gfile.DeleteRecursively(logs_path)
+tf.gfile.MakeDirs(logs_path)
+
+### Model
+# Use a single-layer perceptron as example $pred = softmax(W x+b)$.
+x = tf.placeholder('float', [None, 784], name='data')
+y = tf.placeholder('float', [None, 10], name='label')
+
+# Model bias and weight variables: W, b
+W = tf.Variable(tf.zeros([784,10]), name='weights')
+b = tf.Variable(tf.zeros([10]), name='bias')
+
+# Put the model ops into scopes for tensorboard
+with tf.name_scope('Model'):
+    logits = tf.matmul(x,W)+b
+    pred = tf.nn.softmax( logits )
+with tf.name_scope('Loss'):
+    cost = tf.reduce_mean( tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=y))
+with tf.name_scope('sgd'):
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
+with tf.name_scope('evaluation'):
+    corr_pred = tf.equal( tf.argmax(pred,1), tf.argmax(y,1) )
+    acc = tf.reduce_mean(tf.cast(corr_pred, 'float'))
+
+init = tf.global_variables_initializer()
+
+### Summaries
+# Create *summary* ops to monitor the cost/accuracy
+
+loss_summary = tf.summary.scalar('loss', cost)
+accu_summary = tf.summary.scalar('accuracy', acc)
+
+merged_summary_op = tf.summary.merge([loss_summary, accu_summary])
+
+## Fit Model
 sess = tf.Session()
 sess.run(init)
-for i in range(1000):
-  batch_xs, batch_ys = mnist.train.next_batch(100)
-  sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
-correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels})
 
+# Write tensboard summaries
+summary_writer = tf.summary.FileWriter(logdir=logs_path, graph=tf.get_default_graph())
+
+for epoch in xrange(1, training_epochs+1):
+    avg_cost = 0
+    total_batch = int(mnist.train.num_examples/batch_size)
+    for i in xrange(total_batch):
+        xs, ys = mnist.train.next_batch(batch_size)
+        _, c, summary = sess.run([optimizer, cost, merged_summary_op],
+                                feed_dict = {x:xs, y:ys})
+        summary_writer.add_summary(summary, epoch*total_batch+i)
+        avg_cost += c/total_batch
+    if epoch % display_step == 0:
+        print('epoch %4d, cost = %.9f' % (epoch, avg_cost))
+print("Accuracy: %f" % acc.eval(session=sess, feed_dict={x: mnist.test.images, y: mnist.test.labels}))
+summary_writer.close()
+
+### Examine layers    
 # A red/black/blue colormap
 cdict = {'red':   [(0.0,  1.0, 1.0),
                     (0.25,  1.0, 1.0),
@@ -46,9 +94,12 @@ cdict = {'red':   [(0.0,  1.0, 1.0),
 redblue = matplotlib.colors.LinearSegmentedColormap('red_black_blue',cdict,256)
 
 wts = W.eval(sess)
-for i in range(0,10):
+for i in range(0,5):
     im = wts.flatten()[i::10].reshape((28,-1))
     plt.imshow(im, cmap = redblue, clim=(-1.0, 1.0))
     plt.colorbar()
-    print "Digit %d" % i
+    print("Digit %d" % i)
     plt.show()
+
+### Explore using Tensorboard
+utils.start_tensorboard(logs_path)
