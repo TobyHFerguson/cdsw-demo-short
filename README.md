@@ -8,13 +8,14 @@ Simple demonstrations of Cloudera Data Science Workbench.
 ## To setup (first run only):
 1. In a Python Session:
 ```Python
-! pip install pandas_highcharts tensorflow
+! pip install --upgrade matplotlib pandas_highcharts tensorflow seaborn
 ```
 
 2. In an R Session:
 ```R
 library("devtools")
 devtools::install_github("rstudio/sparklyr")
+install.packages('plotly')
 install.packages("nycflights13")
 install.packages("Lahman")
 install.packages("mgcv")

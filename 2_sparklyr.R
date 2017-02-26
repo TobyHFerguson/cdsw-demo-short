@@ -20,10 +20,11 @@ system.time(sc <- spark_connect(master = "yarn-client"))
 # You can copy R data frames into Spark using the dplyr copy_to function (more typically though you’ll read data within the Spark cluster using the spark_read family of functions). For the examples below we’ll copy some datasets from R into Spark (note that you may need to install the nycflights13 and Lahman packages in order to execute this code):
 
 # ```
-# # If needed, install the sample data sets:
+# # If needed, install the sample data sets and libraries:
 # install.packages("nycflights13")
 # install.packages("Lahman")
 # install.packages("mgcv")
+# install.packages("plotly")
 # ```
 
 library(dplyr)
@@ -32,7 +33,6 @@ flights_tbl <- copy_to(sc, nycflights13::flights, "flights", overwrite = TRUE)
 batting_tbl <- copy_to(sc, Lahman::Batting, "batting", overwrite = TRUE)
 
 # You can list all of the available tables (including those that were already pre-loaded within the cluster) using the dplyr src_tbls function:
-
 src_tbls(sc)
 
 ## Using dplyr
@@ -54,6 +54,11 @@ ggplot(delay, aes(dist, delay)) +
   geom_point(aes(size = count), alpha = 1/2) +
   geom_smooth() +
   scale_size_area(max_size = 2)
+
+# Or use a fancier plot where you can drill into the data.
+library(plotly)          
+plot_ly(delay, x = ~dist, y = ~delay,
+        size = ~count, text = ~paste("Tail Number: ", tailnum))
 
 ## Window Functions
 # dplyr window functions are also supported, for example:

@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from pandas_highcharts.display import display_charts
 import seaborn
-mpl.rc('figure', figsize=(8, 7))
+mpl.rcParams['font.family'] = 'Source Sans Pro'
+mpl.rcParams['axes.labelsize'] = '16'
 
 # Import Data
 # ===========
@@ -20,8 +21,8 @@ data = pd.read_csv('data/GoogleTrendsData.csv', index_col='Date', parse_dates=Tr
 data.head()
 
 # Show DJIA vs. debt related query volume.
-
 display_charts(data, chart_type="stock", title="DJIA vs. Debt Query Volume", secondary_y="debt")
+seaborn.lmplot("debt", "djia", data=data, size=7)
 
 # Detect if search volume is increasing or decreasing in
 # any given week by forming a moving average and testing if the current value
@@ -29,15 +30,14 @@ display_charts(data, chart_type="stock", title="DJIA vs. Debt Query Volume", sec
 #
 # Let's first compute the moving average.
 
-data['debt_mavg'] = pd.rolling_mean(data.debt, 3)
+data['debt_mavg'] = data.debt.rolling(window=3, center=False).mean()
 data.head()
 
 # Since we want to see if the current value is above the moving average of the
 # *preceeding* weeks, we have to shift the moving average timeseries forward by one.
 
 data['debt_mavg'] = data.debt_mavg.shift(1)
-data.head(10)
-
+data.head()
 
 # Generate Orders
 # ===============
@@ -52,9 +52,9 @@ data.head(10)
 # average.
 
 data['order'] = 0
-data['order'][data.debt > data.debt_mavg] = -1
-data['order'][data.debt < data.debt_mavg] = 1
-data.head(10)
+data.loc[data.debt > data.debt_mavg, 'order'] = -1
+data.loc[data.debt < data.debt_mavg, 'order'] = -1
+data.head()
 
 # Compute Returns
 # ===============
@@ -78,4 +78,8 @@ data['ret_djia'] = data['ret_djia'].shift(-1)
 # week $t$ and buy back at week $t+1$ we make the negative returns of week $t+1$."
 
 data['ret_google'] = data.order * data.ret_djia
-data.head(10)
+data['cumulative_google'] = data.ret_google.cumsum()
+data['cumulative_djia'] = data.ret_djia.cumsum()
+
+display_charts(data[["cumulative_google", "cumulative_djia"]], 
+               title="Cumulative Return for DJIA vs. Google Strategy")
