@@ -6,7 +6,7 @@ import utils
 
 ### Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('data/', one_hot=True)
+mnist = input_data.read_data_sets('data/MNIST/', one_hot=True)
 
 ### View Data
 for i in xrange(0, 3):
