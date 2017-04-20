@@ -10,3 +10,4 @@ node_modules
 .viminfo
 slides
 *.pyc
+.bash_history
