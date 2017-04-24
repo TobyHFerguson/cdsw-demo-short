@@ -102,4 +102,4 @@ for i in range(0,5):
     plt.show()
 
 ### Explore using Tensorboard
-utils.start_tensorboard(logs_path)
+utils.start_tensorboard(logs_path, iframe=False)

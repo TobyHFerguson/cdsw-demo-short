@@ -4,15 +4,16 @@ from IPython.core.display import HTML, display
 import subprocess
 process = False
 
-def start_tensorboard(logdir, iframe=True):
+def start_tensorboard(logdir="/tmp/tensorboard", iframe=True):
   "Starts tensorboard on public web port for session."  
-  cmd = ["/opt/conda/bin/python", "/home/sense/.local/bin/tensorboard",
+  cmd = ["/opt/conda/bin/python", "/home/cdsw/.local/bin/tensorboard",
     "--logdir=" + logdir, "--port=8080"]
   global process
   if not process:
     process = subprocess.Popen(cmd)
     time.sleep(3)    
-  url = "http://{id}.consoles.{domain}".format(id=os.environ['SENSE_DASHBOARD_ID'], domain=os.environ['SENSE_DOMAIN'])
+  url = "http://{id}.{domain}".format(id=os.environ['CDSW_ENGINE_ID'], domain=os.environ['CDSW_DOMAIN'])
+  print "Starting Tensorboard at {url}...".format(url=url)
   if iframe:
     html = """
       <p><a href="{url}">Open Tensorboard</a></p>

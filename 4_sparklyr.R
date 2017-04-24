@@ -32,7 +32,7 @@ ggplot(delay, aes(dist, delay)) +
 # In this example we’ll use ml_linear_regression to fit a linear regression model. We’ll use the built-in mtcars dataset, and see if we can predict a car’s fuel consumption (mpg) based on its weight (wt) and the number of cylinders the engine contains (cyl). We’ll assume in each case that the relationship between mpg and each of our features is linear.
 
 # copy mtcars into spark
-mtcars_tbl <- copy_to(sc, mtcars)
+mtcars_tbl <- copy_to(sc, mtcars, overwrite = TRUE)
 
 # transform our data set, and then partition into 'training', 'test'
 partitions <- mtcars_tbl %>%
