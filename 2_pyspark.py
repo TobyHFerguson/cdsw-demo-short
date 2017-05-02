@@ -5,6 +5,7 @@
 # [this example](https://github.com/apache/spark/blob/master/examples/src/main/python/ml/kmeans_example.py).
 
 from __future__ import print_function
+import os
 import sys
 import numpy as np
 from pyspark.sql import SparkSession
@@ -28,9 +29,11 @@ spark = SparkSession\
     .getOrCreate()
 
 # Add the data file to hdfs.
-!hdfs dfs -put data/kmeans_data.txt /user/mbrandwein
+!hdfs dfs -put data/kmeans_data.txt /user/$HADOOP_USER_NAME
 
-lines = spark.read.text("/user/mbrandwein/kmeans_data.txt").rdd.map(lambda r: r[0])
+
+
+lines = spark.read.text("/user/"+os.environ['HADOOP_USER_NAME']+"/kmeans_data.txt").rdd.map(lambda r: r[0])
 data = lines.map(parseVector).cache()
 K = 2
 convergeDist = 0.1
