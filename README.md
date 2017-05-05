@@ -16,6 +16,15 @@ This will create a directory called `cdsw-demo-short`
 
 From here on, when you open up python or R sessions then you need to change the working directory to that directory, like this: In the console of the session:
 
+### Python
+```python
+os.chdir("cdsw-demo-short")
+```
+### R
+```R
+setwd("cdsw-demo-short")
+```
+
 
 ## Workbench
 There are 4 scripts provided which walk through the interactive capabilities of Cloudera Data Science Workbench.
