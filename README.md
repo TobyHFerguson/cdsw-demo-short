@@ -20,6 +20,7 @@ From here on, when you open up python or R sessions then you need to change the 
 
 ### Python
 ```python
+import os
 os.chdir("cdsw-demo-short")
 ```
 ### R
