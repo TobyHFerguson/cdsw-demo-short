@@ -14,6 +14,8 @@ git clone https://github.com/TobyHFerguson/cdsw-demo-short
 ```
 This will create a directory called `cdsw-demo-short`
 
+Go into your workbench and, on the left hand side, hit the 'refresh circle' to sync the workbench with the updated filesystem. You'll now see all your files listed in the workbench. 
+
 From here on, when you open up python or R sessions then you need to change the working directory to that directory, like this: In the console of the session:
 
 ### Python
