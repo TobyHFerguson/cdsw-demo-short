@@ -1,6 +1,22 @@
 # Cloudera Data Science Workbench demos
 Basic tour of Cloudera Data Science Workbench.
 
+NOTE THAT A WORKAROUND IS REQUIRED UNTIL CDSW 1.1.0 ... 
+
+## WORKAROUND
+Do NOT setup this project using CDSW's git mechanism. Instead: 
++ Create a BLANK project
++ Start a session
++ Start a terminal
++ In the terminal execute the following:
+```sh
+git clone https://github.com/TobyHFerguson/cdsw-demo-short
+```
+This will create a directory called `cdsw-demo-short`
+
+From here on, when you open up python or R sessions then you need to change the working directory to that directory, like this: In the console of the session:
+
+
 ## Workbench
 There are 4 scripts provided which walk through the interactive capabilities of Cloudera Data Science Workbench.
 
@@ -40,3 +56,5 @@ install.packages("mgcv")
 ```
 
 3. Stop all sessions, then proceed.
+
+4. WORKAROUND 
