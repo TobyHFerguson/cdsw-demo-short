@@ -6,7 +6,7 @@ process = False
 
 def start_tensorboard(logdir="/tmp/tensorboard", iframe=True):
   "Starts tensorboard on public web port for session."  
-  cmd = ["/opt/conda/bin/python", "/home/cdsw/.local/bin/tensorboard",
+  cmd = ["python", "/home/cdsw/.local/bin/tensorboard",
     "--logdir=" + logdir, "--port=8080"]
   global process
   if not process:
