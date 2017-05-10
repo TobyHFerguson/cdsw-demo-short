@@ -12,6 +12,10 @@ import seaborn
 mpl.rcParams['font.family'] = 'Source Sans Pro'
 mpl.rcParams['axes.labelsize'] = '16'
 
+# Ensure we're in the correct directory
+import os
+if (os.getcwd() != '/home/cdsw/cdsw-demo-short'):os.chdir("cdsw-demo-short")
+
 # Import Data
 # ===========
 #
