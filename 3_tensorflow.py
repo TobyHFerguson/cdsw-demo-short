@@ -4,6 +4,11 @@ import matplotlib
 from matplotlib import pyplot as plt
 import utils
 
+# Ensure we're in the correct directory
+import os
+if (os.getcwd() != '/home/cdsw/cdsw-demo-short'):
+  os.chdir("cdsw-demo-short")
+
 ### Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('data/MNIST/', one_hot=True)

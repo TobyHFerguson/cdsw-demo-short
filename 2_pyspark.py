@@ -10,6 +10,9 @@ import sys
 import numpy as np
 from pyspark.sql import SparkSession
 
+# Ensure we're in the correct directory
+if (os.getcwd() != '/home/cdsw/cdsw-demo-short'):
+  os.chdir("cdsw-demo-short")
 def parseVector(line):
     return np.array([float(x) for x in line.split(' ')])
 
@@ -29,7 +32,7 @@ spark = SparkSession\
     .getOrCreate()
 
 # Add the data file to hdfs.
-!hdfs dfs -put data/kmeans_data.txt /user/$HADOOP_USER_NAME
+!hdfs dfs -put -f data/kmeans_data.txt /user/$HADOOP_USER_NAME
 
 
 
