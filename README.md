@@ -49,7 +49,11 @@ the tensorflow libraries)
 2. In an R Session:
 ```R
 library("devtools")
-library("dplyr")
+if (packageVersion("devtools") < 1.6) {
+  install.packages("devtools")
+}
+devtools::install_github("hadley/lazyeval")
+devtools::install_github("hadley/dplyr")
 devtools::install_github('rstudio/sparklyr')
 install.packages('plotly')
 install.packages("nycflights13")
