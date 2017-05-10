@@ -1,3 +1,8 @@
+# Ensure we're in the correct directory
+import os
+dd=os.environ['HOME']+'/cdsw-demo-short'
+if (os.getcwd() != dd): os.chdir(dd)
+  
 import tensorflow as tf
 import numpy as np
 import matplotlib
