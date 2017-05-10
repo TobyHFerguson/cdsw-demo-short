@@ -58,6 +58,8 @@ import os
 os.chdir("cdsw-demo-short")
 ! pip install -r requirements.txt
 ```
+Close this python session and open a new one (this is to workaround a bug in
+the tensorflow libraries)
 
 2. In an R Session:
 ```R
