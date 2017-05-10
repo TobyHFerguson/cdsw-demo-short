@@ -54,7 +54,9 @@ Note: You only need to do this once.
 
 1. In a Python Session:
 ```Python
-! pip install --upgrade matplotlib pandas_highcharts tensorflow seaborn
+import os
+os.chdir("cdsw-demo-short")
+! pip install -r requirements.txt
 ```
 
 2. In an R Session:
