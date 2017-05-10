@@ -18,16 +18,6 @@ Go into your workbench and, on the left hand side, hit the 'refresh circle' to s
 
 From here on, when you open up python or R sessions then you need to change the working directory to that directory, like this: In the console of the session:
 
-### Python
-```python
-import os
-os.chdir("cdsw-demo-short")
-```
-### R
-```R
-setwd("cdsw-demo-short")
-```
-
 
 ## Workbench
 There are 4 scripts provided which walk through the interactive capabilities of Cloudera Data Science Workbench.
@@ -55,10 +45,11 @@ Note: You only need to do this once.
 1. In a Python Session:
 ```Python
 import os
-os.chdir("cdsw-demo-short")
+if (os.getcwd() != '/home/cdsw/cdsw-demo-short'):os.chdir("cdsw-demo-short")
+
 ! pip install -r requirements.txt
 ```
-Close this python session and open a new one (this is to workaround a bug in
+*Close* this python session and open a new one (this is to workaround a bug in
 the tensorflow libraries)
 
 2. In an R Session:
