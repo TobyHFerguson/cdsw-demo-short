@@ -1,7 +1,7 @@
 # Cloudera Data Science Workbench demos
 Basic tour of Cloudera Data Science Workbench.
 
-NOTE THAT A WORKAROUND IS REQUIRED UNTIL CDSW 1.1.0 ... 
+Need simple workaround until CDSW 1.1.0 (a third party library has an issue :( ) 
 
 ## WORKAROUND
 Do NOT setup this project using CDSW's git mechanism. Instead: 
