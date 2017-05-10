@@ -41,10 +41,7 @@ Note: You only need to do this once.
 
 1. In a Python Session:
 ```Python
-import os
-if (os.getcwd() != '/home/cdsw/cdsw-demo-short'):os.chdir("cdsw-demo-short")
-
-! pip install -r requirements.txt
+! pip install -r /home/cdsw/cdsw-demo-short/requirements.txt
 ```
 *Close* this python session and open a new one (this is to workaround a bug in
 the tensorflow libraries)
