@@ -28,8 +28,13 @@ spark = SparkSession\
     .appName("PythonKMeans")\
     .getOrCreate()
 
+# Ensure we're in the correct directory
+import os
+dd=os.environ['HOME']+'/cdsw-demo-short'
+if (os.getcwd() != dd): os.chdir(dd)
+  
 # Add the data file to hdfs.
-!hdfs dfs -put data/kmeans_data.txt /user/$HADOOP_USER_NAME
+!hdfs dfs -put -f $HOME/cdsw-demo-short/data/kmeans_data.txt /user/$HADOOP_USER_NAME
 
 
 
