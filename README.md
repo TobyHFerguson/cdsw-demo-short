@@ -59,4 +59,3 @@ install.packages("mgcv")
 
 3. Stop all sessions, then proceed.
 
-4. WORKAROUND 
