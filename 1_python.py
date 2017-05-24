@@ -14,8 +14,6 @@ mpl.rcParams['axes.labelsize'] = '16'
 
 # Ensure we're in the correct directory
 import os
-dd=os.environ['HOME']+'/cdsw-demo-short'
-if (os.getcwd() != dd): os.chdir(dd)
   
 # Import Data
 # ===========
