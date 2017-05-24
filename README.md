@@ -1,23 +1,6 @@
 # Cloudera Data Science Workbench demos
 Basic tour of Cloudera Data Science Workbench.
 
-Need simple workaround until CDSW 1.1.0 (a third party library has an issue :-( ) 
-
-## Workaround
-Do not setup this project using CDSW's git mechanism. Instead: 
-+ Create a BLANK project
-+ Start a session
-+ Start a terminal
-+ In the terminal execute the following:
-```sh
-git clone https://github.com/TobyHFerguson/cdsw-demo-short
-```
-This will create a directory called `cdsw-demo-short`
-
-Go into your workbench and, on the left hand side, hit the 'refresh circle' to sync the workbench with the updated filesystem. You'll now see all your files listed in the workbench.
-
-That's it - quick and simple ...
-
 ## Workbench
 There are 4 scripts provided which walk through the interactive capabilities of Cloudera Data Science Workbench.
 
