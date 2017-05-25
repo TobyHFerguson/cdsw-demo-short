@@ -38,6 +38,7 @@ install.packages('plotly')
 install.packages("nycflights13")
 install.packages("Lahman")
 install.packages("mgcv")
+install.packages('shiny') 
 ```
 
 3. Stop all sessions, then proceed.
