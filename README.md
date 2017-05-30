@@ -15,8 +15,9 @@ There are 4 scripts provided which walk through the interactive capabilities of 
   - Ability to install and use custom packages (e.g. `pip search tensorflow`)
 4. **R on Spark via Sparklyr (R).** Demonstrates:
   - Use familiar dplyr with Spark using [Sparklyr](http://spark.rstudio.com)
-  - *Note: Be sure to run `4a.R` first to create your Spark session!*
-
+5. **Advanced visualization with Shiny (R)** Demonstrates:
+  - Use of 'shiny' to provide interactive graphics inside CDSW
+  
 ## Jobs
 We recommend setting up a **"Nightly Analysis"** job to illustrate how data scientists can easily automate their projects.
 
