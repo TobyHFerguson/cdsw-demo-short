@@ -6,13 +6,13 @@ import utils
 
 ### Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('data/MNIST/', one_hot=True)
+mnist = input_data.read_data_sets('data/MNIST', one_hot=True)
 
 ### View Data
 for i in xrange(0, 3):
   tmp = mnist.train.images[i]
   tmp = tmp.reshape((28,28))
-  plt.imshow(tmp, cmap = cm.Greys)
+  plt.imshow(tmp, cmap = plt.cm.Greys)
   plt.show()
 
 ### Parameters
