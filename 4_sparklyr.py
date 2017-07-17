@@ -1,8 +1,6 @@
 ## Connecting to Spark
 
 library(sparklyr)
-library(dplyr)
-
 system.time(sc <- spark_connect(master = "yarn-client"))
 
 # The returned Spark connection (sc) provides a remote dplyr data source to the Spark cluster.

@@ -27,10 +27,9 @@ Note: You only need to do this once.
 
 1. In a Python Session:
 ```Python
-! pip install -r requirements.txt
+! pip install --upgrade dask keras matplotlib pandas_highcharts protobuf tensorflow seaborn
 ```
-Close this python session and open a new one (this is to workaround a bug in
-the tensorflow libraries)
+Note, you must then stop the workbench and restart it in order for all the packages to be seen.
 
 2. In an R Session:
 ```R
