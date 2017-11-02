@@ -25,9 +25,9 @@ We recommend setting up a **"Nightly Analysis"** job to illustrate how data scie
 ## Setup instructions
 Note: You only need to do this once.
 
-1. In a Python Session:
+1. In a Python 2 Session:
 ```Python
-! pip install --upgrade dask keras matplotlib pandas_highcharts protobuf tensorflow seaborn
+! pip2 install --upgrade dask keras matplotlib pandas_highcharts protobuf tensorflow seaborn
 ```
 Note, you must then stop the workbench and restart it in order for all the packages to be seen.
 
