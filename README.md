@@ -29,7 +29,7 @@ Note: You only need to do this once.
 ```Python
 ! pip2 install --upgrade dask keras matplotlib pandas_highcharts protobuf tensorflow seaborn
 ```
-Note, you must then stop the workbench and restart it in order for all the packages to be seen.
+Note, you must then stop the session and start a new Python session in order for all the packages to be seen.
 
 2. In an R Session:
 ```R
